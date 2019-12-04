@@ -132,6 +132,12 @@ corp() {
 	ssh -D 8123 -f -C -q -N support01.chi
 }
 
+if [[ -v CPAIR ]]; then
+	if [[ $USER == 'admin' ]]; then
+		export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+	fi
+fi
+
 # shellcheck source=.bash-rsi/bashrc
 source ~/.bash-rsi/bashrc
 source /usr/lib/git-core/git-sh-prompt
