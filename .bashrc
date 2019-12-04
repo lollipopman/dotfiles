@@ -132,8 +132,15 @@ corp() {
 	ssh -D 8123 -f -C -q -N support01.chi
 }
 
+git_ps1() {
+	# only execute prompt if repo is not our dotfiles
+	if [[ $(git rev-parse --absolute-git-dir) != ~/.git ]]; then
+		__git_ps1 "${@}"
+	fi
+}
+
 # shellcheck source=.bash-rsi/bashrc
 source ~/.bash-rsi/bashrc
 source /usr/lib/git-core/git-sh-prompt
-PS1='\[\e[36m\e[3m\]\h:\[\e[23m\][\[\e[m\]\w\[\e[36m\]]\[\e[m\]$(__git_ps1 " (%s)")\n\[\e[36m\e[m\]$(dollar $?) '
+PS1='\[\e[36m\e[3m\]\h:\[\e[23m\][\[\e[m\]\w\[\e[36m\]]\[\e[m\]$(git_ps1 " (%s)")\n\[\e[36m\e[m\]$(dollar $?) '
 PS2=' > '
