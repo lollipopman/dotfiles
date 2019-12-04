@@ -1,0 +1,23 @@
+let g:ale_fix_on_save = 1
+" let g:ale_linter_aliases = {'pandoc': ['markdown']}
+let g:ale_enabled = 1
+let g:ale_fixers = {
+\   'sh': ['shfmt'],
+\   'c': ['clang-format'],
+\   'ruby': ['rufo'],
+\}
+let g:ale_linters = {
+\   'sh': ['shellcheck'],
+\   'puppet': ['puppet-lint', 'puppet'],
+\}
+" let g:ale_echo_delay = 200
+"Plug 'reedes/vim-pencil'
+highlight clear SignColumn
+" Black on White Terminal
+set background=light
+colorscheme default
+" Hack to remove linelength errors
+highlight LineLengthError ctermbg=white guibg=white
+autocmd ColorScheme * highlight LineLengthError ctermbg=white guibg=white
+let &t_SI .= "\e[6 q"
+let &t_EI .= "\e[2 q"
