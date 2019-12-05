@@ -133,10 +133,13 @@ corp() {
 }
 
 git_ps1() {
+	# preserve exit status for other other PS1 functions
+	local exit=$?
 	# only execute prompt if repo is not our dotfiles
 	if [[ $(git rev-parse --absolute-git-dir) != ~/.git ]]; then
 		__git_ps1 "${@}"
 	fi
+	return $exit
 }
 
 # shellcheck source=.bash-rsi/bashrc
