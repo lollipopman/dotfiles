@@ -15,6 +15,7 @@ shopt -s cmdhist
 shopt -s lithist
 # extended globbing, including negating
 shopt -s extglob
+shopt -s globstar
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
