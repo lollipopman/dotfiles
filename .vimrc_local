@@ -21,3 +21,5 @@ highlight LineLengthError ctermbg=white guibg=white
 autocmd ColorScheme * highlight LineLengthError ctermbg=white guibg=white
 let &t_SI .= "\e[6 q"
 let &t_EI .= "\e[2 q"
+hi clear SpellBad
+hi SpellBad ctermbg=Yellow
