@@ -15,6 +15,7 @@ shopt -s cmdhist
 shopt -s lithist
 # extended globbing, including negating
 shopt -s extglob
+shopt -s globstar
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -138,8 +139,18 @@ if [[ -v CPAIR ]]; then
 	fi
 fi
 
+git_ps1() {
+	# preserve exit status for other other PS1 functions
+	local exit=$?
+	# only execute prompt if repo is not our dotfiles
+	if [[ $(git rev-parse --absolute-git-dir) != ~/.git ]]; then
+		__git_ps1 "${@}"
+	fi
+	return $exit
+}
+
 # shellcheck source=.bash-rsi/bashrc
 source ~/.bash-rsi/bashrc
 source /usr/lib/git-core/git-sh-prompt
-PS1='\[\e[36m\e[3m\]\h:\[\e[23m\][\[\e[m\]\w\[\e[36m\]]\[\e[m\]$(__git_ps1 " (%s)")\n\[\e[36m\e[m\]$(dollar $?) '
+PS1='\[\e[36m\e[3m\]\h:\[\e[23m\][\[\e[m\]\w\[\e[36m\]]\[\e[m\]$(git_ps1 " (%s)")\n\[\e[36m\e[m\]$(dollar $?) '
 PS2=' > '
