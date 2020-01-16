@@ -80,6 +80,7 @@ alias htask="task project:home"
 alias wtask="task project:work"
 alias o="xdg-open"
 alias strip-escape-codes='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"'
+alias bti="cd ~/bt/infrastructure"
 
 # https://unix.stackexchange.com/questions/18087/can-i-get-individual-man-pages-for-the-bash-builtin-commands
 man() {
