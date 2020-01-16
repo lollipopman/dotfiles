@@ -134,6 +134,12 @@ corp() {
 	ssh -D 8123 -f -C -q -N support01.chi
 }
 
+if [[ -v CPAIR ]]; then
+	if [[ $USER == 'admin' ]]; then
+		export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+	fi
+fi
+
 git_ps1() {
 	# preserve exit status for other other PS1 functions
 	local exit=$?
