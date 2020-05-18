@@ -5,45 +5,9 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# set umask
-umask u=rwx,g=rwx,o=rx
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-shopt -s cmdhist
-shopt -s lithist
-# extended globbing, including negating
-shopt -s extglob
-shopt -s globstar
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-	if [ -f /usr/share/bash-completion/bash_completion ]; then
-		. /usr/share/bash-completion/bash_completion
-	elif [ -f /etc/bash_completion ]; then
-		. /etc/bash_completion
-	fi
-fi
-
-# Exports
-export HISTIGNORE="&:ls:[bf]g:exit"
-export LESS="-fMiRx4"
-export EDITOR=vi
-export LIBVIRT_DEFAULT_URI='qemu:///system'
-export GOPATH=~/go
-export RMADISON_ARCHITECTURE='amd64'
-export DEBEMAIL="hathaway@paypal.com"
-export DEBFULLNAME="Jesse Hathaway"
-export MANWIDTH=80
-# allows less to know the total line length via stdin, by going to the EOF,
-# this then allows it to generate a percentage in the status line.
-export MANPAGER='less +Gg'
-# don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=erasedups
-export HISTFILESIZE=2000
+# shellcheck source=.bash-rsi/bashrc
+source ~/.bash-rsi/bashrc
+source /usr/lib/git-core/git-sh-prompt
 
 pathmunge() {
 	if ! echo "${PATH}" | grep -Eq "(^|:)$1($|:)"; then
@@ -54,32 +18,6 @@ pathmunge() {
 		fi
 	fi
 }
-
-pathmunge ~/bin after
-pathmunge ~/.cabal/bin
-pathmunge ~/go/bin
-pathmunge /sbin after
-pathmunge /usr/sbin after
-pathmunge ~/node_modules/.bin after
-pathmunge ~/.cargo/bin
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
-
-# set vi mode
-set -o vi
-
-# tabs at 4 columns
-tabs -4
-alias ls='ls -T4 -w80'
-
-alias xclip="xclip -selection clipboard"
-alias lsblk='lsblk -o NAME,SIZE,TYPE,FSTYPE,MODEL,MOUNTPOINT,LABEL'
-alias addkeys='ssh-add ~/.ssh/id_rsa_git ~/.ssh/id_rsa'
-alias htask="task project:home"
-alias wtask="task project:work"
-alias o="xdg-open"
-alias strip-escape-codes='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"'
 
 # https://unix.stackexchange.com/questions/18087/can-i-get-individual-man-pages-for-the-bash-builtin-commands
 man() {
@@ -133,12 +71,6 @@ corp() {
 	ssh -D 8123 -f -C -q -N support01.chi
 }
 
-if [[ -v CPAIR ]]; then
-	if [[ $USER == 'admin' ]]; then
-		export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
-	fi
-fi
-
 git_ps1() {
 	# preserve exit status for other other PS1 functions
 	local exit=$?
@@ -149,8 +81,83 @@ git_ps1() {
 	return $exit
 }
 
-# shellcheck source=.bash-rsi/bashrc
-source ~/.bash-rsi/bashrc
-source /usr/lib/git-core/git-sh-prompt
+# set umask
+umask u=rwx,g=rwx,o=rx
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+shopt -s cmdhist
+shopt -s lithist
+# extended globbing, including negating
+shopt -s extglob
+shopt -s globstar
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	fi
+fi
+
+# Exports
+export HISTIGNORE="&:ls:[bf]g:exit"
+export LESS="-fMiRx4"
+export EDITOR=vi
+export LIBVIRT_DEFAULT_URI='qemu:///system'
+export RMADISON_ARCHITECTURE='amd64'
+export DEBEMAIL="hathaway@paypal.com"
+export DEBFULLNAME="Jesse Hathaway"
+export MANWIDTH=80
+# allows less to know the total line length via stdin, by going to the EOF,
+# this then allows it to generate a percentage in the status line.
+export MANPAGER='less +Gg'
+# don't put duplicate lines in the history. See bash(1) for more options
+export HISTCONTROL=erasedups
+export HISTFILESIZE=2000
+
+# Go
+export GOPATH=~/go
+pathmunge ~/go/bin
+
+# CDPATH for common directories
+CDPATH=.:~:"${GOPATH}"/src/github.braintreeps.com/lollipopman
+
+pathmunge ~/bin after
+pathmunge ~/.cabal/bin
+pathmunge /sbin after
+pathmunge /usr/sbin after
+pathmunge ~/node_modules/.bin after
+pathmunge ~/.cargo/bin
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+
+# set vi mode
+set -o vi
+
+# tabs at 4 columns
+tabs -4
+alias ls='ls -T4 -w80'
+
+# Aliases
+alias xclip="xclip -selection clipboard"
+alias lsblk='lsblk -o NAME,SIZE,TYPE,FSTYPE,MODEL,MOUNTPOINT,LABEL'
+alias addkeys='ssh-add ~/.ssh/id_rsa_git ~/.ssh/id_rsa'
+alias htask="task project:home"
+alias wtask="task project:work"
+alias o="xdg-open"
+alias strip-escape-codes='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"'
+
+if [[ -v CPAIR ]]; then
+	if [[ $USER == 'admin' ]]; then
+		export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+	fi
+fi
+
 PS1='\[\e[36m\e[3m\]\h:\[\e[23m\][\[\e[m\]\w\[\e[36m\]]\[\e[m\]$(git_ps1 " (%s)")\n\[\e[36m\e[m\]$(dollar $?) '
 PS2=' > '
