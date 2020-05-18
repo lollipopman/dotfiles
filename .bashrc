@@ -62,7 +62,7 @@ dollar() {
 	if [[ $rc -eq 0 ]]; then
 		printf -v out '\[\e[36m\]\$\[\e[m\]'
 	else
-		printf -v out '\[\e[31m\]\$\[\e[m\]'
+		printf -v out '\[\e[1;31m\]\$\[\e[m\]'
 	fi
 	printf '%s' "${out@P}"
 }
