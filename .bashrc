@@ -7,7 +7,11 @@
 
 # shellcheck source=.bash-rsi/bashrc
 source ~/.bash-rsi/bashrc
-source /usr/lib/git-core/git-sh-prompt
+if [[ -e /usr/lib/git-core/git-sh-prompt ]]; then
+	source /usr/lib/git-core/git-sh-prompt
+else
+	source /usr/libexec/git-core/git-sh-prompt
+fi
 
 pathmunge() {
 	if ! echo "${PATH}" | grep -Eq "(^|:)$1($|:)"; then
@@ -140,6 +144,13 @@ pathmunge ~/.cargo/bin
 # set vi mode
 set -o vi
 
+# Read html from a pipe and display it in chrome
+function chromepipe() {
+	shopt -s lastpipe
+	base64 -w0 | read -r data
+	chrome -p -- --new-window 'data:text/html;base64,'"${data}"
+}
+
 # tabs at 4 columns
 tabs -4
 alias ls='ls -T4 -w80'
@@ -158,6 +169,10 @@ if [[ -v CPAIR ]]; then
 		export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
 	fi
 fi
+
+function oneliner {
+	sed -E -e 's/#.*$//' -e '/^\s*$/d' -e 's/$/;/' -e 's/\s+/ /g' -e 's/(then|else|\{);/\1/g'|paste -s -d' '
+}
 
 GIT_PS1_SHOWCOLORHINTS=1
 GIT_PS1_SHOWDIRTYSTATE=1
