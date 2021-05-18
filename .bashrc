@@ -129,14 +129,19 @@ export GOPATH=~/go
 pathmunge ~/go/bin
 
 # CDPATH for common directories
-CDPATH=.:~:"${GOPATH}"/src/github.braintreeps.com/lollipopman
+CDPATH=.:~:~/src:~/bt:"${GOPATH}"/src/github.braintreeps.com/lollipopman
 
-pathmunge ~/bin after
-pathmunge ~/.cabal/bin
+# add sbin
 pathmunge /sbin after
 pathmunge /usr/sbin after
+# personal scripts
+pathmunge ~/bin after
+# haskell
+pathmunge ~/.cabal/bin
+# nodejs
 pathmunge ~/node_modules/.bin after
-pathmunge ~/.cargo/bin
+# rust
+pathmunge ~/.cargo/bin after
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
