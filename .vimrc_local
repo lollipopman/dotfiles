@@ -1,15 +1,24 @@
 let g:ale_fix_on_save = 1
-" let g:ale_linter_aliases = {'pandoc': ['markdown']}
 let g:ale_enabled = 1
-let g:ale_fixers = {
-\   'sh': ['shfmt'],
-\   'c': ['clang-format'],
-\   'ruby': ['rufo'],
-\}
-let g:ale_linters = {
-\   'sh': ['shellcheck'],
-\   'puppet': ['puppet-lint', 'puppet'],
-\}
+augroup shells
+	autocmd!
+	autocmd FileType sh setlocal noexpandtab
+augroup END
+let g:ale_fixers['sh'] = ['shfmt']
+let g:ale_fixers['c'] = ['clang-format']
+let g:ale_fixers['cpp'] = ['clang-format']
+let g:ale_fixers['ruby'] = ['rufo']
+let g:ale_fixers['markdown'] = ['pandoc']
+let g:ale_fixers['css'] = ['prettier']
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_linters['c'] = ['clangd']
+let g:ale_linters['cpp'] = ['clangd']
+let g:ale_linters['puppet'] = ['puppet-lint']
+" doesn't work, overridden by ftplugin
+"let g:ale_linters['sh'] = ['language_server', 'shellcheck']
+" enables completion with lsp aka clangd
+let g:ale_completion_enabled = 1
+" let g:ale_linter_aliases = {'pandoc': ['markdown']}
 " let g:ale_echo_delay = 200
 "Plug 'reedes/vim-pencil'
 highlight clear SignColumn
