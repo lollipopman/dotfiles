@@ -142,6 +142,9 @@ pathmunge ~/.cabal/bin
 pathmunge ~/node_modules/.bin after
 # rust
 pathmunge ~/.cargo/bin after
+# cpair
+pathmunge /home/admin/bt/dotfiles/bin
+pathmunge /home/admin/cosmos/cpair-tools/bin
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
@@ -175,8 +178,13 @@ if [[ -v CPAIR ]]; then
 	fi
 fi
 
-function oneliner {
-	sed -E -e 's/#.*$//' -e '/^\s*$/d' -e 's/$/;/' -e 's/\s+/ /g' -e 's/(then|else|\{);/\1/g'|paste -s -d' '
+function oneliner() {
+	sed -E -e 's/#.*$//' -e '/^\s*$/d' -e 's/$/;/' -e 's/\s+/ /g' -e 's/(then|else|\{);/\1/g' | paste -s -d' '
+}
+
+# cpair
+fixssh() {
+	eval $(~/bt/system-scripts/bin/fixssh $1 $2)
 }
 
 GIT_PS1_SHOWCOLORHINTS=1
