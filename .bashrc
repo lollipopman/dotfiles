@@ -128,6 +128,13 @@ export HISTFILESIZE=2000
 export GOPATH=~/go
 pathmunge ~/go/bin
 
+# Java
+JAVA_HOME=$(readlink -f /usr/bin/java | sed 's:bin/java::')
+export JAVA_HOME
+
+# Firefox, scale the UI!
+export GDK_DPI_SCALE=1.5
+
 # CDPATH for common directories
 CDPATH=.:~:~/src:~/bt:"${GOPATH}"/src/github.braintreeps.com/lollipopman
 
@@ -167,8 +174,8 @@ alias ls='ls -T4 -w80'
 alias xclip="xclip -selection clipboard"
 alias lsblk='lsblk -o NAME,SIZE,TYPE,FSTYPE,MODEL,MOUNTPOINT,LABEL'
 alias addkeys='ssh-add ~/.ssh/id_rsa_git ~/.ssh/id_rsa'
-alias htask="task project:home"
-alias wtask="task project:work"
+alias htask="task +home"
+alias wtask="task +braintree"
 alias o="xdg-open"
 alias strip-escape-codes='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"'
 
