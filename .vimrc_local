@@ -8,27 +8,34 @@ let g:ale_fixers['sh'] = ['shfmt']
 let g:ale_fixers['c'] = ['clang-format']
 let g:ale_fixers['cpp'] = ['clang-format']
 let g:ale_fixers['ruby'] = ['rufo']
-let g:ale_fixers['markdown'] = ['pandoc']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_linters['c'] = ['clangd']
-let g:ale_linters['cpp'] = ['clangd']
 let g:ale_linters['puppet'] = ['puppet-lint']
-" doesn't work, overridden by ftplugin
-"let g:ale_linters['sh'] = ['language_server', 'shellcheck']
+let g:ale_linters['c'] = ['clangtidy']
 " enables completion with lsp aka clangd
 let g:ale_completion_enabled = 1
-" let g:ale_linter_aliases = {'pandoc': ['markdown']}
-" let g:ale_echo_delay = 200
-"Plug 'reedes/vim-pencil'
 highlight clear SignColumn
 " Black on White Terminal
 set background=light
 colorscheme default
-" Hack to remove linelength errors
+" HACK: to fix spelling
+hi clear SpellBad
+hi SpellBad cterm=reverse
+" HACK: to remove linelength errors
 highlight LineLengthError ctermbg=white guibg=white
 autocmd ColorScheme * highlight LineLengthError ctermbg=white guibg=white
 let &t_SI .= "\e[6 q"
 let &t_EI .= "\e[2 q"
-hi clear SpellBad
-hi SpellBad ctermbg=Yellow
+" Register clangd with vim-lsp
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd', '-background-index']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
+" Give me back my 🐁!
+set mouse=a
+set ttymouse=sgr
+" HACK: fix visual selection
+hi Visual term=reverse cterm=reverse
