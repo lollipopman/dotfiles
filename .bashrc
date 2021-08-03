@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -o errexit
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # vim: set noexpandtab:shiftwidth=1
 
@@ -9,8 +12,6 @@
 source ~/.bash-rsi/bashrc
 if [[ -e /usr/lib/git-core/git-sh-prompt ]]; then
 	source /usr/lib/git-core/git-sh-prompt
-else
-	source /usr/libexec/git-core/git-sh-prompt
 fi
 
 pathmunge() {
@@ -192,6 +193,12 @@ function oneliner() {
 # cpair
 fixssh() {
 	eval $(~/bt/system-scripts/bin/fixssh $1 $2)
+}
+
+# secrets vault
+sts() {
+	cd ~/src/secrets-vault/
+	bash bin/get-sts-credentials-for-blue -a production -u jhathaway
 }
 
 GIT_PS1_SHOWCOLORHINTS=1
