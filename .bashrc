@@ -164,22 +164,24 @@ function chromepipe() {
 
 # tabs at 4 columns
 tabs -4
-alias ls='ls -T4 -w80'
 
 # Aliases
 alias xclip="xclip -selection clipboard"
 alias lsblk='lsblk -o NAME,SIZE,TYPE,FSTYPE,MODEL,MOUNTPOINT,LABEL'
-alias addkeys='ssh-add ~/.ssh/id_rsa_git ~/.ssh/id_rsa'
 alias htask="task +home"
 alias wtask="task +braintree"
 alias o="xdg-open"
-alias strip-escape-codes='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"'
+alias ls='ls -T4 -w80 -p'
 
 if [[ -v CPAIR ]]; then
 	if [[ $USER == 'admin' ]]; then
 		export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
 	fi
 fi
+
+function strip-escape-codes {
+	sed -E 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g'
+}
 
 function oneliner() {
 	sed -E -e 's/#.*$//' -e '/^\s*$/d' -e 's/$/;/' -e 's/\s+/ /g' -e 's/(then|else|\{);/\1/g' | paste -s -d' '
@@ -194,6 +196,11 @@ fixssh() {
 sts() {
 	cd ~/src/secrets-vault || return 1
 	bash bin/get-sts-credentials-for-blue -a production -u jhathaway
+}
+
+# pandoc
+xclipmd() {
+	pandoc -f gfm -t html --self-contained "$1" | xclip -t text/html
 }
 
 export GIT_PS1_SHOWCOLORHINTS=1

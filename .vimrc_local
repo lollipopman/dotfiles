@@ -10,6 +10,7 @@ let g:ale_fixers['cpp'] = ['clang-format']
 let g:ale_fixers['ruby'] = ['rufo']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['java'] = ['google_java_format']
 let g:ale_linters['puppet'] = ['puppet-lint']
 let g:ale_linters['c'] = ['clangtidy']
 " enables completion with lsp aka clangd
