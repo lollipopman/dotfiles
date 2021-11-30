@@ -193,8 +193,7 @@ statusbar = {
       visible = "always";
 
       items = {
-        prompt = { priority = "-1"; };
-        prompt_empty = { priority = "-1"; };
+        uberprompt = { priority = "-1"; };
         input = { priority = "10"; };
       };
     };
@@ -234,13 +233,6 @@ statusbar = {
         barend = { priority = "100"; alignment = "right"; };
       };
     };
-    awl_3 = {
-      items = {
-        barstart = { priority = "100"; };
-        awl_3 = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
   };
 };
 settings = {
@@ -249,7 +241,7 @@ settings = {
     user_name = "jhathaway";
     nick = "jhathaway";
   };
-  "fe-text" = { actlist_sort = "refnum"; colors_ansi_24bit = "yes"; };
+  "fe-text" = { actlist_sort = "refnum"; };
   "perl/core/scripts" = {
     awl_shared_sbar = "OFF";
     awl_maxcolumns = "0";
