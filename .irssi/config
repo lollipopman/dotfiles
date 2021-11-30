@@ -1,72 +1,66 @@
 servers = (
   {
-    address = "irc.libera.chat";
-    chatnet = "LiberaChat";
+    address = "bnc.irccloud.com";
+    chatnet = "LiberaChat@IRCCloud";
     port = "6697";
     use_tls = "yes";
+    password = <PASSWORD>;
     tls_verify = "yes";
     autoconnect = "yes";
   }
 );
 
-chatnets = {
-  LiberaChat = {
-    type = "IRC";
-    sasl_mechanism = "PLAIN";
-    sasl_username = "jhathaway";
-    sasl_password = <PASSWORD>;
-  };
-};
+chatnets = { "LiberaChat@IRCCloud" = { type = "IRC"; }; };
 
 channels = (
   {
     name = "#mediawiki_security";
-    chatnet = "LiberaChat";
+    chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
   {
     name = "#wikimedia-operations";
-    chatnet = "LiberaChat";
+    chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
   {
     name = "#wikimedia-sre";
-    chatnet = "LiberaChat";
+    chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
   {
     name = "#wikimedia-sre-private";
-    chatnet = "LiberaChat";
+    chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
   {
     name = "#wikimedia-sre-foundations";
-    chatnet = "LiberaChat";
+    chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
   {
     name = "#wikimedia-dcops";
-    chatnet = "LiberaChat";
+    chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
   {
     name = "#wikimedia-traffic";
-    chatnet = "LiberaChat";
+    chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
   {
     name = "#wikimedia-data-persistence";
-    chatnet = "LiberaChat";
+    chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
   {
     name = "#wikimedia-serviceops";
-    chatnet = "LiberaChat";
+    chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
   {
     name = "#wikimedia-observability";
-    chatnet = "LiberaChat";
+    chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   }
 );
@@ -199,7 +193,8 @@ statusbar = {
       visible = "always";
 
       items = {
-        uberprompt = { priority = "-1"; };
+        prompt = { priority = "-1"; };
+        prompt_empty = { priority = "-1"; };
         input = { priority = "10"; };
       };
     };
@@ -243,13 +238,6 @@ statusbar = {
       items = {
         barstart = { priority = "100"; };
         awl_3 = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
-    awl_4 = {
-      items = {
-        barstart = { priority = "100"; };
-        awl_4 = { };
         barend = { priority = "100"; alignment = "right"; };
       };
     };
