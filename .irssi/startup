@@ -1,0 +1,10 @@
+/script load uberprompt.pl
+/script load adv_windowlist.pl
+/script load desktop-notify.pl
+/script load go.pl
+/script load nickcolor.pl
+/script load smartfilter.pl
+/script load title.pl
+/script load trackbar.pl
+/script load ido_switcher.pl
+/script load vim_mode.pl
