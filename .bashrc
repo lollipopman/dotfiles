@@ -3,6 +3,9 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# Get our secrets, 🤐
+# shellcheck source=.env_secrets
+source ~/.env_secrets
 # shellcheck source=.bash-rsi/bashrc
 source ~/.bash-rsi/bashrc
 if [[ -e /usr/lib/git-core/git-sh-prompt ]]; then
