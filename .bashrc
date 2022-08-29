@@ -74,6 +74,27 @@ corp() {
 	ssh -D 8123 -f -C -q -N support01.chi
 }
 
+function join_by {
+	local d=${1-} f=${2-}
+	if shift 2; then
+		printf %s "$f" "${@/#/$d}"
+	fi
+}
+
+# Display the current background jobs in a format suitable for your PS1
+jobs_ps1() {
+	local exit_status=$?
+	declare -a job_cmds
+	while read -r job_count _ cmd; do
+		job_cmds+=("${job_count} ${cmd}")
+	done < <(jobs)
+	if ((${#job_cmds[@]} > 0)); then
+		printf ' '
+		join_by ', ' "${job_cmds[@]}"
+	fi
+	return $exit_status
+}
+
 git_ps1() {
 	# preserve exit status for other other PS1 functions
 	local exit_status=$?
@@ -236,5 +257,5 @@ function gerrit-link {
 
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWDIRTYSTATE=1
-PS1='\[\e[36m\e[3m\]\h:\[\e[23m\][\[\e[m\]\w\[\e[36m\]]\[\e[m\]$(git_ps1 " (%s)")\n\[\e[36m\e[m\]$(dollar $?) '
+PS1='\[\e[36m\e[3m\]\h:\[\e[23m\][\[\e[m\]\w\[\e[36m\]]\[\e[m\]$(git_ps1 " (%s)")\[\e[1;33m\]$(jobs_ps1)\[\e[m\]\n\[\e[36m\e[m\]$(dollar $?) '
 PS2=' > '
