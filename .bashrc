@@ -198,7 +198,8 @@ alias lsblk='lsblk -o NAME,SIZE,TYPE,FSTYPE,MODEL,MOUNTPOINT,LABEL'
 alias o="xdg-open"
 alias ls='ls -T4 -w80 -p'
 
-function strip-escape-codes {
+# Strip terminal escape sequences from stdin
+function noescape {
 	sed -E 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g'
 }
 
@@ -253,6 +254,11 @@ function gerrit-link {
 	gitiles='https://gerrit.wikimedia.org/r/plugins/gitiles'
 	repo_path=${origin_url#"$gerrit_base"}
 	printf '%s/%s/+/%s\n' "$gitiles" "$repo_path" "$commit"
+}
+
+function bubble {
+	local distro=${1:-debian:latest}
+	podman run --rm -it "$distro" bash
 }
 
 export GIT_PS1_SHOWCOLORHINTS=1
