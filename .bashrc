@@ -144,7 +144,7 @@ export MANWIDTH=80
 # this then allows it to generate a percentage in the status line.
 export MANPAGER='less +Gg'
 # Don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=erasedups
+export HISTCONTROL=erasedups:ignorespace:ignoredups
 export HISTFILESIZE=2000
 export DOCKER_HOST="unix:///run/user/${UID}/podman/podman.sock"
 
