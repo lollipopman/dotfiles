@@ -24,12 +24,22 @@ channels = (
     autojoin = "Yes";
   },
   {
+    name = "#wikimedia-cloud";
+    chatnet = "LiberaChat@IRCCloud";
+    autojoin = "Yes";
+  },
+  {
     name = "#wikimedia-sre";
     chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
   {
     name = "#wikimedia-sre-private";
+    chatnet = "LiberaChat@IRCCloud";
+    autojoin = "Yes";
+  },
+  {
+    name = "#wikimedia-staff";
     chatnet = "LiberaChat@IRCCloud";
     autojoin = "Yes";
   },
@@ -193,7 +203,8 @@ statusbar = {
       visible = "always";
 
       items = {
-        uberprompt = { priority = "-1"; };
+        prompt = { priority = "-1"; };
+        prompt_empty = { priority = "-1"; };
         input = { priority = "10"; };
       };
     };
@@ -230,6 +241,41 @@ statusbar = {
       items = {
         barstart = { priority = "100"; };
         awl_2 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_3 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_3 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_4 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_4 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_5 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_5 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_6 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_6 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_7 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_7 = { };
         barend = { priority = "100"; alignment = "right"; };
       };
     };

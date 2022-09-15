@@ -1,20 +1,25 @@
-let g:ale_fix_on_save = 1
 let g:ale_enabled = 1
+let g:ale_fix_on_save = 1
 augroup shells
 	autocmd!
 	autocmd FileType sh setlocal noexpandtab
 augroup END
 let g:ale_fixers['sh'] = ['shfmt']
+let g:ale_fixers['bats'] = ['shfmt']
+"not yet used for wikimedia puppet
+"let g:ale_fixers['python'] = ['black']
 let g:ale_fixers['c'] = ['clang-format']
 let g:ale_fixers['cpp'] = ['clang-format']
 let g:ale_fixers['ruby'] = ['rufo']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['java'] = ['google_java_format']
-let g:ale_linters['puppet'] = ['puppet-lint']
+let g:ale_fixers['puppet'] = ['puppetlint']
+"let g:ale_linters['puppet'] = ['puppet-lint']
+"let g:ale_linters['puppet'] = ['puppet']
 let g:ale_linters['c'] = ['clangtidy']
 " enables completion with lsp aka clangd
-let g:ale_completion_enabled = 1
+" let g:ale_completion_enabled = 1
 highlight clear SignColumn
 " Black on White Terminal
 set background=light
@@ -35,8 +40,36 @@ if executable('clangd')
         \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
         \ })
 endif
+" Configure the python-language-server to use flake8 settings rather than
+" pycodestyle settings
+let g:lsp_settings = {
+\  'remark-language-server': {
+\    'disabled': 1,
+\   },
+\  'solargraph': {
+\    'disabled': 1,
+\   },
+\  'bash-language-server': {
+\    'disabled': 1,
+\   },
+\   'pylsp-all': {
+\     'workspace_config': {
+\       'pylsp': {
+\         'configurationSources': ['flake8']
+\       }
+\     }
+\   },
+\}
 " Give me back my 🐁!
 set mouse=a
 set ttymouse=sgr
 " HACK: fix visual selection
 hi Visual term=reverse cterm=reverse
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/vim-lsp.log')
+" set termguicolors
+" set cursorline
+" highlight Cursorline cterm=none guibg=#eb28ad
+" hi Normal guibg=#300A24
+" virtual text?
+let g:ale_virtualtext_cursor = 2
