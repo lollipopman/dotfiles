@@ -1,0 +1,7 @@
+#!/bin/sh
+# set win(aka option) as alt as well
+setxkbmap -option altwin:alt_win
+if [ -f ~/.profile ]; then
+	# shellcheck source=/home/hathaway/.profile
+	. ~/.profile
+fi

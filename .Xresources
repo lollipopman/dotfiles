@@ -1,0 +1,3 @@
+#include ".Xresources.d/xterm.xr"
+#include ".Xresources.d/yeahconsole.xr"
+#include ".Xresources.d/contrasty_brightness.xr"

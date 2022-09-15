@@ -1,0 +1,11 @@
+! vim: set syntax=xdefaults expandtab tabstop=2:
+!
+! Yeah Console resources
+!
+yeahconsole*term:                        xterm
+yeahconsole*stepSize:                    0
+yeahconsole*toggleKey:                   Alt+grave
+! number of lines of the console. Default is 10.
+yeahconsole*consoleHeight:               50
+yeahconsole*handleWidth:                 7
+yeahconsole*handleColor:                 dark blue

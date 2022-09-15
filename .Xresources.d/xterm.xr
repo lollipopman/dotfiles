@@ -1,0 +1,50 @@
+! vim: set syntax=xdefaults expandtab tabstop=2:
+! Renders truetype fonts on startup
+*.VT100.renderFont:                  true
+!*.VT100.forceBoxChars:               false
+*.VT100.faceName:                    Source Code Pro
+*.VT100.faceSize:                    14
+!*.colorITMode:                       false
+*.VT100.faceSize1:                   6
+*.VT100.faceSize2:                   8
+*.VT100.faceSize3:                   11
+*.VT100.faceSize4:                   14
+*.VT100.faceSize5:                   30
+*.VT100.faceSize6:                   40
+!*.VT100.foreground:                  white
+*.VT100.fontDobuleSize:              true
+!*.VT100.background:                  black
+*.VT100.cursorColor:                 purple
+*.VT100.cursorBlink:                 false
+*.VT100.borderWidth:                 0
+*.VT100.printAttributes:             0
+*.VT100.bellIsUrgent:                true
+*.VT100.bellSupressTime:             500
+*.VT100.visualBell:                  true
+*.VT100.visualBellDelay:             200
+*.VT100.visualBellLine:              true
+*.VT100.scrollBar:                   false
+*.VT100.locale:                      true
+*.VT100.printerCommand:              lp
+*.VT100.altIsNotMeta:                true
+*.VT100.altSendsEscape:              true
+! Treat, !, %, *, -, ., /, ?, @, :, and ~ as part of numbers and words for selecting, Stolen from UNIX Power Tools
+*.VT100.charClass:                   33:48, 37:48, 42:48, 45-47:48, 58:48, 63-64:48, 126:48
+*.VT100.backarrowKey:                false
+! Allow sixel graphics. (Try: "convert -colors 16 foo.jpg sixel:-").
+*.VT100.decTerminalID:              vt340
+!*.VT100.numColorRegisters:           256
+*.VT100.internalBorder:              0
+*.VT100.allowWindowOps:              true
+*.VT100.allowTitleOps:               true
+*.VT100.allowFontOps:                true
+*.VT100.saveLines:                   10000
+*.VT100.selectToClipboard:           true
+!Ctrl <KeyPress> KP_Add:larger-vt-font()
+!Ctrl <KeyPress> KP_Subtract:smaller-vt-font()
+*.VT100.Translations: #override \
+        Ctrl Shift <Key>V:          insert-selection(CLIPBOARD) \n\
+        Ctrl Shift <Key>C:          copy-selection(CLIPBOARD) \n\
+        Ctrl <Key>Tab:             dabbrev-expand()
+! Shift <Btn1Up>:             exec-formatted("google-chrome '%t'", CLIPBOARD)
+! Allow sixel graphics. (Try: "convert -colors 16 foo.jpg sixel:-").
