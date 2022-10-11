@@ -1,0 +1,32 @@
+! ----------------------------
+! Contrasty Darkness
+! Version: 2017-08-16
+! https://www.markusweimar.de/
+! ----------------------------
+
+*vt100.background: black
+*vt100.foreground: white
+! black
+*color0: rgb:0000/0000/0000
+*color8: rgb:0000/0000/0000
+! red
+*color1: rgb:cdcd/0000/0000
+*color9: rgb:cdcd/0000/0000
+! green
+*color2: rgb:0000/cdcd/0000
+*color10: rgb:0000/cdcd/0000
+! yellow
+*color3: rgb:cdcd/cdcd/0000
+*color11: rgb:cdcd/cdcd/0000
+! blue
+*color4: rgb:0000/0000/eeee
+*color12: rgb:0000/0000/eeee
+! magenta
+*color5: rgb:cdcd/0000/cdcd
+*color13: rgb:cdcd/0000/cdcd
+! cyan
+*color6: rgb:0000/cdcd/cdcd
+*color14: rgb:0000/cdcd/cdcd
+! white
+*color7: rgb:ffff/ffff/ffff
+*color15: rgb:ffff/ffff/ffff

@@ -3,7 +3,7 @@
 *.VT100.renderFont:                  true
 !*.VT100.forceBoxChars:               false
 *.VT100.faceName:                    Source Code Pro
-*.VT100.faceSize:                    14
+*.VT100.faceSize:                    12
 !*.colorITMode:                       false
 *.VT100.faceSize1:                   6
 *.VT100.faceSize2:                   8
@@ -14,6 +14,7 @@
 !*.VT100.foreground:                  white
 *.VT100.fontDobuleSize:              true
 !*.VT100.background:                  black
+! broken??
 *.VT100.cursorColor:                 purple
 *.VT100.cursorBlink:                 false
 *.VT100.borderWidth:                 0
@@ -48,3 +49,5 @@
         Ctrl <Key>Tab:             dabbrev-expand()
 ! Shift <Btn1Up>:             exec-formatted("google-chrome '%t'", CLIPBOARD)
 ! Allow sixel graphics. (Try: "convert -colors 16 foo.jpg sixel:-").
+XTerm.buffered:                    true
+XTerm.bufferedFPS:                 60
