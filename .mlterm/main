@@ -5,3 +5,4 @@ bel_mode = visual
 use_clipboard = true
 input_method = kbd
 fontsize = 24
+tabsize = 4
