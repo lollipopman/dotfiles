@@ -1,0 +1,7 @@
+use_aafont= true
+scrollbar_mode = right
+logsize = unlimited
+bel_mode = visual
+use_clipboard = true
+input_method = kbd
+fontsize = 24
