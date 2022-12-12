@@ -5,7 +5,7 @@
 set $mod Mod1
 
 # font for window titles. ISO 10646 = Unicode
-font pango:Source Code Pro 14
+font pango:Source Code Pro 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -20,7 +20,7 @@ bindsym $mod+Return exec xterm
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+e exec /usr/bin/dmenu_run -fn 'Source Code Pro-14'
+bindsym $mod+e exec /usr/bin/dmenu_run -fn 'Source Code Pro-12'
 
 # change focus
 bindsym $mod+h focus left
@@ -61,16 +61,16 @@ bindsym $mod+t layout tabbed
 #bindsym $mod+d layout default
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+m floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+m focus mode_toggle
+
+# clear dunst notifications
+bindsym $mod+space exec dunstctl close-all
 
 # focus the parent container
 bindsym $mod+a focus parent
-
-# focus the child container
-#bindcode $mod+d focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
