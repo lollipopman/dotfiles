@@ -1,0 +1,24 @@
+[user]
+	name = Jesse Hathaway
+	email = jesse@mbuki-mvuki.org
+	signingkey = /home/jhathaway/.ssh/id_rsa_git.pub
+[pull]
+	ff = only
+[init]
+	defaultBranch = main
+[gitreview]
+	username = jhathaway
+[sendemail]
+  smtpServer = /home/hathaway/go/bin/sendgmail
+  smtpServerOption = -sender=jesse@mbuki-mvuki.org
+[credential]
+	helper = store
+[core]
+	excludesfile = ~/.config/git/ignore
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /home/jhathaway/.config/git/allowed_signers
+[alias]
+	# typing is hard!
+	grpe = grep
