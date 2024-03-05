@@ -4,8 +4,8 @@
 ! https://www.markusweimar.de/
 ! ----------------------------
 
-*vt100.background: white
-*vt100.foreground: black
+*vt100.background: #ffffff
+*vt100.foreground: #000000
 ! black
 *vt100.color0:  #000000
 *vt100.color8:  #000000

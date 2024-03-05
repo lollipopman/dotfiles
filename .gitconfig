@@ -9,8 +9,8 @@
 [gitreview]
 	username = jhathaway
 [sendemail]
-  smtpServer = /home/hathaway/go/bin/sendgmail
-  smtpServerOption = -sender=jesse@mbuki-mvuki.org
+    smtpServer = /home/hathaway/go/bin/sendgmail
+    smtpServerOption = -sender=jesse@mbuki-mvuki.org
 [credential]
 	helper = store
 [core]
@@ -22,3 +22,7 @@
 [alias]
 	# typing is hard!
 	grpe = grep
+	shwo = show
+	wc = whatchanged
+	grep-changed = "!f(){ git diff-index -U -G \"$@\" HEAD; };f "
+    grep-staged  = "!f(){ git diff-index -U --cached -G \"$@\" HEAD; };f "

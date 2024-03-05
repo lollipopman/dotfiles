@@ -1,35 +1,50 @@
+" White terminal background
+set background=light
+colorscheme default
+
+set signcolumn=auto
+set tabstop=4
 let g:ale_enabled = 1
 let g:ale_fix_on_save = 1
-augroup shells
+augroup filetypes
 	autocmd!
-	autocmd FileType sh setlocal noexpandtab
+	autocmd FileType sh setlocal textwidth=80 tabstop=4 shiftwidth=4 softtabstop=-1 noexpandtab
+	autocmd FileType puppet setlocal textwidth=80 tabstop=4 shiftwidth=4 softtabstop=-1 expandtab smarttab
+	autocmd FileType epuppet setlocal textwidth=80 tabstop=4 shiftwidth=4 softtabstop=-1 expandtab smarttab
+	autocmd FileType yaml setlocal textwidth=80 tabstop=2 shiftwidth=2 softtabstop=-1 expandtab smarttab
+	autocmd FileType json setlocal textwidth=80 tabstop=2 shiftwidth=2 softtabstop=-1 expandtab smarttab
 augroup END
 let g:ale_fixers['sh'] = ['shfmt']
 let g:ale_fixers['bats'] = ['shfmt']
-"not yet used for wikimedia puppet
-"let g:ale_fixers['python'] = ['black']
+"not yet used for wikimedia python
+" let g:ale_fixers['python'] = ['black']
 let g:ale_fixers['c'] = ['clang-format']
 let g:ale_fixers['cpp'] = ['clang-format']
-let g:ale_fixers['ruby'] = ['rufo']
+let g:ale_fixers['ruby'] = ['syntax_tree']
 let g:ale_fixers['css'] = ['prettier']
-let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['jptavascript'] = ['clang-format']
+let g:ale_fixers['json'] = ['clang-format']
 let g:ale_fixers['java'] = ['google_java_format']
 let g:ale_fixers['puppet'] = ['puppetlint']
-"let g:ale_linters['puppet'] = ['puppet-lint']
-"let g:ale_linters['puppet'] = ['puppet']
 let g:ale_linters['c'] = ['clangtidy']
 " enables completion with lsp aka clangd
 " let g:ale_completion_enabled = 1
-highlight clear SignColumn
+" highlight clear SignColumn
 " Black on White Terminal
-set background=light
-colorscheme default
+
 " HACK: to fix spelling
 hi clear SpellBad
 hi SpellBad cterm=reverse
+
+" HACK: Fix unreadable highlight foreground color under the cursor for
+" vim-lsp, probably a bug related to using vim with a white background
+hi clear Error
+hi Error cterm=reverse ctermfg=9 ctermbg=15
+
 " HACK: to remove linelength errors
 highlight LineLengthError ctermbg=white guibg=white
 autocmd ColorScheme * highlight LineLengthError ctermbg=white guibg=white
+
 let &t_SI .= "\e[6 q"
 let &t_EI .= "\e[2 q"
 " Register clangd with vim-lsp
@@ -43,7 +58,13 @@ endif
 " Configure the python-language-server to use flake8 settings rather than
 " pycodestyle settings
 let g:lsp_settings = {
+\  'marksman': {
+\    'disabled': 1,
+\   },
 \  'remark-language-server': {
+\    'disabled': 1,
+\   },
+\  'vscode-json-language-server': {
 \    'disabled': 1,
 \   },
 \  'solargraph': {
@@ -60,16 +81,41 @@ let g:lsp_settings = {
 \     }
 \   },
 \}
+" vim-lsp settings
+" disable virtual text for errors
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+" use vim's native lsp protocol support, disabled, buggy
+" let g:lsp_use_native_client = 1
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/vim-lsp.log')
 " Give me back my 🐁!
 set mouse=a
 set ttymouse=sgr
 " HACK: fix visual selection
 hi Visual term=reverse cterm=reverse
-" let g:lsp_log_verbose = 1
-" let g:lsp_log_file = expand('~/vim-lsp.log')
 " set termguicolors
 " set cursorline
 " highlight Cursorline cterm=none guibg=#eb28ad
 " hi Normal guibg=#300A24
-" virtual text?
-let g:ale_virtualtext_cursor = 2
+" virtual text only on current line
+let g:ale_virtualtext_cursor = 'disable'
+" Don't highlight vertical split
+highlight VertSplit cterm=NONE
+" Set vertical split chars to heavy unicode box drawing line
+set fillchars+=vert:\┃
+" show highlight group under cursor
+function! SynStack ()
+    for i1 in synstack(line("."), col("."))
+        let i2 = synIDtrans(i1)
+        let n1 = synIDattr(i1, "name")
+        let n2 = synIDattr(i2, "name")
+        echo n1 "->" n2
+    endfor
+endfunction
+map gm :call SynStack()<CR>
+nnoremap <silent> <Leader>tf :let g:ale_fix_on_save = !g:ale_fix_on_save<CR>
+" folding via the lsp
+" set foldmethod=expr
+"   \ foldexpr=lsp#ui#vim#folding#foldexpr()
+"   \ foldtext=lsp#ui#vim#folding#foldtext()
