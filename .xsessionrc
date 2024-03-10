@@ -1,7 +1,10 @@
 #!/bin/sh
+
+# needed for xss-lock
+systemctl --user import-environment XDG_SESSION_ID
 # set win(aka option) as alt as well
 setxkbmap -option altwin:alt_win
 if [ -f ~/.profile ]; then
-	# shellcheck source=/home/hathaway/.profile
+	# shellcheck source=/home/jhathaway/.profile
 	. ~/.profile
 fi
