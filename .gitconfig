@@ -26,3 +26,5 @@
 	wc = whatchanged
 	grep-changed = "!f(){ git diff-index -U -G \"$@\" HEAD; };f "
     grep-staged  = "!f(){ git diff-index -U --cached -G \"$@\" HEAD; };f "
+[commit]
+    verbose = true
