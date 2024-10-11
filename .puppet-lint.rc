@@ -1,0 +1,3 @@
+# I'm working on disabling legacy facts, T372666, but no need to warn me, or
+# auto fix.
+--no-legacy_facts-check
