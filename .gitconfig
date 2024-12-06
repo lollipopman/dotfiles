@@ -8,23 +8,29 @@
 	defaultBranch = main
 [gitreview]
 	username = jhathaway
-[sendemail]
-    smtpServer = /home/hathaway/go/bin/sendgmail
-    smtpServerOption = -sender=jesse@mbuki-mvuki.org
-[credential]
-	helper = store
 [core]
 	excludesfile = ~/.config/git/ignore
-[gpg]
-	format = ssh
-[gpg "ssh"]
-	allowedSignersFile = /home/jhathaway/.config/git/allowed_signers
+# [gpg]
+# 	format = ssh
+# [gpg "ssh"]
+# 	allowedSignersFile = /home/jhathaway/.config/git/allowed_signers
 [alias]
 	# typing is hard!
 	grpe = grep
 	shwo = show
 	wc = whatchanged
 	grep-changed = "!f(){ git diff-index -U -G \"$@\" HEAD; };f "
-    grep-staged  = "!f(){ git diff-index -U --cached -G \"$@\" HEAD; };f "
+	grep-staged  = "!f(){ git diff-index -U --cached -G \"$@\" HEAD; };f "
+	amend = commit --amend
+	mylog = log --author jhathaway@wikimedia.org --author jesse@mbuki-mvuki.org
 [commit]
-    verbose = true
+	verbose = true
+[url "git@salsa.debian.org:installer-team/"]
+	pushInsteadOf = https://salsa.debian.org/installer-team/
+[status]
+	short = true
+# wmf config
+[includeIf "hasconfig:remote.*.url:https://*.wikimedia.org/**"]
+    path = ~/.config/git/wmf
+[includeIf "hasconfig:remote.*.url:git@gitlab.wikimedia.org:repos/**"]
+    path = ~/.config/git/wmf
